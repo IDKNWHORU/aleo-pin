@@ -7,10 +7,6 @@
 }
 
 #root {
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 150px;
   height: 100vh;
 }
 
@@ -58,12 +54,24 @@
   gap: 15px;
 
   button {
-    font-size: 15px;
+    background: #faebcd;
+    padding: 0 80px;
+    border: 10px solid #fff;
+    border-right-color: #aaa;
+    border-bottom-color: #aaa;
+    font-size: 2em;
+    font-family: "KBO-Dia-Gothic_bold";
+  }
+
+  button:hover {
+    background: #f0d092;
+    border: 10px solid #eee;
+    border-right-color: #999;
+    border-bottom-color: #999;
   }
 }
 
 .intro {
-  grid-column: span 2;
   margin: auto 0;
   text-align: center;
   display: flex;
@@ -71,6 +79,8 @@
   height: 100vh;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 
   p {
     font-family: "KBO-Dia-Gothic_bold";
@@ -87,6 +97,7 @@
     color: #fff;
     align-self: center;
     font-size: 3em;
+    font-family: "KBO-Dia-Gothic_bold";
   }
 
   button:hover {
@@ -100,9 +111,57 @@
   }
 }
 
+.intro-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: url("/main.webp");
+  background-size: 100vw 100vh;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.ingame {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .game {
-  margin: auto 0;
+  margin: auto;
+  width: 50%;
   height: 700px;
+  background: #0027ffdb;
+  border-radius: 5px;
+  border: 5px solid #aaa;
+  font-family: "KBO-Dia-Gothic_bold";
+
+  h2 {
+    background: #01147c;
+    margin: 0;
+    padding: 18px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 20px;
+  }
+}
+
+.game-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: url("/ingame.webp");
+  background-size: 100vw 100vh;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 .history {
@@ -114,6 +173,7 @@
     margin: 0;
     padding: 21px 0;
     text-align: center;
+    background: red;
   }
 
   p {
@@ -122,25 +182,47 @@
 }
 
 .pad {
-  margin: auto 0;
+  margin: auto;
+  background: #0000009c;
+  border-radius: 12px;
+  max-width: 700px;
+  padding: 15px;
 
   input {
-    width: 100%;
+    width: Calc(100% - 20px);
     height: 40px;
     margin: 15px 0;
-    font-size: 24px;
-    border-radius: 15px;
+    border-radius: 7px;
     text-indent: 20px;
     letter-spacing: 1.5px;
+    background: #faebcd;
+    border: 10px solid #fff;
+    border-right-color: #aaa;
+    border-bottom-color: #aaa;
+    font-size: 2em;
+    font-family: "KBO-Dia-Gothic_bold";
   }
 
   input:disabled {
-    background: #fff;
     color: #999;
   }
 
   .submit {
     width: 100%;
     margin: 15px 0;
+    background: #faebcd;
+    padding: 1px 22px;
+    border: 10px solid #fff;
+    border-right-color: #aaa;
+    border-bottom-color: #aaa;
+    font-size: 2em;
+    font-family: "KBO-Dia-Gothic_bold";
+  }
+
+  .submit:hover {
+    background: #f0d092;
+    border: 10px solid #eee;
+    border-right-color: #999;
+    border-bottom-color: #999;
   }
 }

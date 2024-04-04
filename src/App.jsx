@@ -48,8 +48,6 @@ function App() {
       .split("")
       .map((value) => `${value}u8`);
 
-    console.log(target);
-
     const result = await aleoWorker.localProgramExecution(
       baseball_program,
       "main",
@@ -98,136 +96,141 @@ function App() {
     <>
       {target.length > 0 ? (
         <>
-          <div className="game">
-            <h2>Your Life: {life}</h2>
-            <h3>History</h3>
-            <div className="history">
-              <h4>INPUT</h4>
-              <h4>RESULT</h4>
-              {history.map((item) => (
-                <Fragment key={crypto.randomUUID()}>
-                  <p>{item.value}</p>
-                  <p>
-                    {item.result[0]}strikes {item.result[1]} balls
-                  </p>
-                </Fragment>
-              ))}
+          <div className="ingame">
+            <div className="game">
+              <h2 className="life">Your Life: {life}</h2>
+              <h3>History</h3>
+              <div className="history">
+                <h4>INPUT</h4>
+                <h4>RESULT</h4>
+                {history.map((item) => (
+                  <Fragment key={crypto.randomUUID()}>
+                    <p>{item.value}</p>
+                    <p>
+                      {item.result[0]}strikes {item.result[1]} balls
+                    </p>
+                  </Fragment>
+                ))}
+              </div>
+            </div>
+            <div className="pad">
+              <input
+                ref={fieldRef}
+                type="number"
+                name="value"
+                id="value"
+                defaultValue={value}
+                readOnly
+                disabled={executing || finish}
+              />
+              <div className="grid-3x3">
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(1)}
+                  disabled={executing || finish}
+                >
+                  1
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(2)}
+                  disabled={executing || finish}
+                >
+                  2
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(3)}
+                  disabled={executing || finish}
+                >
+                  3
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(4)}
+                  disabled={executing || finish}
+                >
+                  4
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(5)}
+                  disabled={executing || finish}
+                >
+                  5
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(6)}
+                  disabled={executing || finish}
+                >
+                  6
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(7)}
+                  disabled={executing || finish}
+                >
+                  7
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(8)}
+                  disabled={executing || finish}
+                >
+                  8
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(9)}
+                  disabled={executing || finish}
+                >
+                  9
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton("BACK")}
+                  disabled={executing || finish}
+                >
+                  B
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton(0)}
+                  disabled={executing || finish}
+                >
+                  0
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleClickButton("RESET")}
+                  disabled={executing || finish}
+                >
+                  R
+                </button>
+              </div>
+              <button
+                className="submit"
+                type="button"
+                disabled={executing || finish}
+                onClick={submit}
+              >
+                {finish ? "Finish" : executing ? "checking..." : "SUBMIT"}
+              </button>
             </div>
           </div>
-          <div className="pad">
-            <input
-              ref={fieldRef}
-              type="number"
-              name="value"
-              id="value"
-              defaultValue={value}
-              readOnly
-              disabled={executing || finish}
-            />
-            <div className="grid-3x3">
-              <button
-                type="button"
-                onClick={() => handleClickButton(1)}
-                disabled={executing || finish}
-              >
-                1
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(2)}
-                disabled={executing || finish}
-              >
-                2
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(3)}
-                disabled={executing || finish}
-              >
-                3
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(4)}
-                disabled={executing || finish}
-              >
-                4
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(5)}
-                disabled={executing || finish}
-              >
-                5
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(6)}
-                disabled={executing || finish}
-              >
-                6
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(7)}
-                disabled={executing || finish}
-              >
-                7
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(8)}
-                disabled={executing || finish}
-              >
-                8
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(9)}
-                disabled={executing || finish}
-              >
-                9
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton("BACK")}
-                disabled={executing || finish}
-              >
-                &#8592;
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton(0)}
-                disabled={executing || finish}
-              >
-                0
-              </button>
-              <button
-                type="button"
-                onClick={() => handleClickButton("RESET")}
-                disabled={executing || finish}
-              >
-                R
-              </button>
-            </div>
-            <button
-              className="submit"
-              type="button"
-              disabled={executing || finish}
-              onClick={submit}
-            >
-              {finish ? "Finish" : executing ? "checking..." : "SUBMIT"}
-            </button>
-          </div>
+          <div className="game-background" />
         </>
       ) : (
-        <div className="intro">
-          {/* <p>Aleo</p> */}
-          <p>Base Ball Game</p>
-          <button disabled={executing} onClick={startGame}>
-            {executing ? `Starting...` : `Start`}
-          </button>
-        </div>
+        <>
+          <div className="intro">
+            <p>Base Ball Game</p>
+            <button disabled={executing} onClick={startGame}>
+              {executing ? `Starting...` : `Start`}
+            </button>
+          </div>
+          <div className="intro-background" />
+        </>
       )}
     </>
   );
