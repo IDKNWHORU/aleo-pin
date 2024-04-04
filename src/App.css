@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 150px;
+  height: 100vh;
 }
 
 .logo {
@@ -35,8 +36,68 @@
 
 .card {
   padding: 2em;
+  margin: auto 0;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.grid-3x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+
+  button {
+    font-size: 15px;
+  }
+}
+
+.intro {
+  margin: auto 0;
+}
+
+.game {
+  margin: auto 0;
+  height: 700px;
+}
+
+.history {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  h4 {
+    border-bottom: 1px solid;
+    margin: 0;
+    padding: 21px 0;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+.pad {
+  margin: auto 0;
+
+  input {
+    width: 100%;
+    height: 40px;
+    margin: 15px 0;
+    font-size: 24px;
+    border-radius: 15px;
+    text-indent: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  input:disabled {
+    background: #fff;
+    color: #999;
+  }
+
+  .submit {
+    width: 100%;
+    margin: 15px 0;
+  }
 }
