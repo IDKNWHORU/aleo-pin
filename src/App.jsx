@@ -62,20 +62,23 @@ function App() {
       result[0].replaceAll("\n", "").replaceAll(" ", "").replaceAll("u8", "")
     );
 
-    if (strikes === 3) {
-      alert("You Win!");
-    } else {
-      alert(`${strikes} strikes, ${balls} balls`);
-    }
-
-    setLife(life - 1);
     setHistory([
       ...history,
       { value: fieldRef.current.value, result: [strikes, balls] },
     ]);
     setValue("");
 
-    if (life - 1 === 0 || strikes === 3) setFinish(true);
+    if (strikes === 3) {
+      alert("You Win!");
+      setFinish(true);
+      return;
+    } else {
+      setLife(life - 1);
+      if (life - 1 === 0) {
+        alert("Game Over!");
+        setFinish(true);
+      }
+    }
   }
 
   const handleClickButton = (input) => {
@@ -218,16 +221,13 @@ function App() {
           </div>
         </>
       ) : (
-        <>
-          <h1 className="intro">Aleo Base Ball Game</h1>
-          <div className="card">
-            <p>
-              <button disabled={executing} onClick={startGame}>
-                {executing ? `Starting...` : `Start Game`}
-              </button>
-            </p>
-          </div>
-        </>
+        <div className="intro">
+          {/* <p>Aleo</p> */}
+          <p>Base Ball Game</p>
+          <button disabled={executing} onClick={startGame}>
+            {executing ? `Starting...` : `Start`}
+          </button>
+        </div>
       )}
     </>
   );

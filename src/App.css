@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "KBO-Dia-Gothic_bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
 #root {
   margin: 0 auto;
   display: grid;
@@ -35,6 +43,7 @@
 }
 
 .card {
+  display: none;
   padding: 2em;
   margin: auto 0;
 }
@@ -54,7 +63,41 @@
 }
 
 .intro {
+  grid-column: span 2;
   margin: auto 0;
+  text-align: center;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+
+  p {
+    font-family: "KBO-Dia-Gothic_bold";
+    color: #ff5500;
+    text-shadow: 10px 10px 10px #000;
+    text-align: center;
+    font-size: 5em;
+  }
+
+  button {
+    background: #000a7b;
+    border: 5px solid #111;
+    border-radius: 100px;
+    color: #fff;
+    align-self: center;
+    font-size: 3em;
+  }
+
+  button:hover {
+    background: #000fb8;
+    border-color: #646cff;
+  }
+
+  button:disabled {
+    background: #000a7b;
+    border-color: #111;
+  }
 }
 
 .game {
