@@ -192,7 +192,7 @@ function App() {
                   finish ? resetGame() : submit();
                 }}
               >
-                {finish ? "Restart" : executing ? "Execute..." : "SUBMIT"}
+                {finish ? "Restart" : executing ? "Executing..." : "SUBMIT"}
               </button>
             </div>
           </div>
