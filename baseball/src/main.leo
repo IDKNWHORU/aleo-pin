@@ -1,8 +1,14 @@
 program base_ball_game.aleo {
     mapping life: address => u8;
+    mapping score: address => u8;
 
     struct Game {
         target: [u8; 3],
+    }
+
+    record Score {
+        owner: address,
+        input_value: u8,
     }
 
     function evaluate_guess(game: Game, guess: [u8; 3]) -> [u8; 2] {
@@ -59,5 +65,17 @@ program base_ball_game.aleo {
 
             Mapping::set(life, sender, current_life - 1u8);
         }
+    }
+
+    transition recording(result: u8) -> Score {
+        return Score {
+            owner: self.caller,
+            input_value : result
+        } then finalize(self.caller, result);
+    }
+
+    finalize recording(public sender: address, result: u8) {
+        let current_score: u8 = Mapping::get_or_use(score, sender, 0u8);
+        Mapping::set(score, sender, current_score + result);
     }
 }

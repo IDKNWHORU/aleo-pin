@@ -1,90 +1,47 @@
-# React + Aleo + Leo
+# Aleo Base Ball Game
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/AleoHQ/sdk/tree/testnet3/create-aleo-app/template-react-leo)
+이 프로젝트는 Aloe + React 템플릿을 이용한 프로젝트 입니다.
 
-This template provides a minimal setup to get React and Aleo working in Vite
-with HMR and some ESLint rules.
+이 템플릿은 Loe 프로그램을 로컬에서 실행하고 있으며, baseball 디렉토리에 위치해있습니다.
 
-This template includes a Leo program that is loaded by the web app located in
-the `helloworld` directory.
+NOTE: 이 프로젝트는 현재 온체인 데이터를 다루고 있지 않습니다. 로컬환경에서 Leo 프로그램을 실행하고 있습니다.
 
-Note: Webpack is currently used for production builds due to a
-[bug](https://github.com/vitejs/vite/issues/13367) with Vite related to nested
-workers.
-
-### Start in development mode
+### 개발환경 시작하기
 
 ```bash
-npm run dev
+yarn dev
 ```
 
-Your app should be running on http://localhost:5173/
+http://localhost:5173/ 주소로 실행할 수 있습니다.
 
 ### Build Leo program
 
-1. Copy the `helloworld/.env.example` to `helloworld/.env` (this will be ignored
-   by Git):
+1. `baseball/.env` 파일을 생성합니다. (.env 파일은 .gitignore 목록에 포함되어 있습니다.):
 
    ```bash
-   cd helloworld
-   cp .env.example .env
+   cd baseball
+   touch .env
    ```
 
-2. Replace `PRIVATE_KEY=user1PrivateKey` in the `.env` with your own key (you
-   can use an existing one or generate your own at https://aleo.tools/account)
+2. `.env`파일 안의 `NETWORK=testnet3`를 입력하고 `PRIVATE_KEY=user1PrivateKey` 자신이 사용하는 계정의 비밀키값을 user1PrivateKey 대신에 입력해주세요.
 
-3. Follow instructions to install Leo here: https://github.com/AleoHQ/leo
+3. [Leo 설치 해주세요](https://github.com/AleoHQ/leo)
 
-4. You can edit `helloworld/src/main.leo` and run `leo run` to compile and update the
-   Aleo instructions under `build` which are loaded by the web app.
+4. `baseball/src/main.leo` 파일을 수정해서 스마트 컨트랙트를 작성할 수 있습니다. 그리고 `leo run` 명령어를 실행해서 코드를 컴파일하고 Aleo 명령어를 변경할 수 있습니다.
 
-## Deploy program from web app
+### 게임 설명
 
-> [!WARNING]  
-> This is for demonstration purposes or local testing only, in production applications you
-> should avoid building a public facing web app with private key information
+야구 게임은 자동으로 생성된 숫자를 맞히는 대화형 숫자 야구 게임입니다.
 
-Information on generating a private key, seeding a wallet with funds, and finding a spendable record can be found here
-if you are unfamiliar: https://developer.aleo.org/testnet/getting_started/deploy_execute_demo
+~~게임을 완료한 후에는 자신의 점수를 리더보드에서 확인할 수 있습니다.~~
 
-Aleo programs deployed require unique names, make sure to edit the program's name to something unique in `helloworld/src/main.leo`, `helloworld/program.json`, rename `helloworld/inputs/helloworld.in` and rebuild.
+### 게임 규칙
 
-1. In the `worker.js` file modify the privateKey to be an account with available
-   funds
+게임 진행: 사용자는 3자리 숫자를 입력하여 미리 정해진 숫자를 맞춥니다. 미리 정해진 숫자에 대해 사용자의 추측에 대해 정확하고 신속하게 "스트라이크", "볼"으로 응답합니다.
 
-   ```js
-   // Use existing account with funds
-   const account = new Account({
-     privateKey: "user1PrivateKey",
-   });
-   ```
+~~리더보드: 게임이 끝난 후 사용자는 자신의 점수를 리더보드에서 확인할 수 있습니다. 사용자는 자신의 점수를 다른 사용자들과 비교하여 경쟁할 수 있습니다.~~
 
-2. (Optional) Provide a fee record manually (located in commented code within `worker.js`)
+### 향후 구현 계획
 
-   If you do not provide a manual fee record, the SDK will attempt to scan for a record starting at the latest block. A simple way to speed this up would be to make a public transaction to this account right before deploying.
-   
-3. Run the web app and hit the deploy button
-
-## Production deployment
-
-### Build
-
-`npm run build`
-
-Upload `dist` folder to your host of choice.
-
-### ⚠️ Header warnings
-
-`DOMException: Failed to execute 'postMessage' on 'Worker': SharedArrayBuffer transfer requires self.crossOriginIsolated`
-
-If you get a warning similar to this when deploying your application, you need
-to make sure your web server is configured with the following headers:
-
-```
-Cross-Origin-Opener-Policy: same-origin
-Cross-Origin-Embedder-Policy: require-corp
-```
-
-We've included a `_headers` file that works with some web hosts (e.g. Netlify)
-but depending on your host / server setup you may need to configure the headers
-manually.
+- 온체인 스마트 컨트랙트 호출
+- 온체인 데이터를 이용한 리더보드 조회
