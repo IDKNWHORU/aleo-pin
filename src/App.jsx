@@ -42,6 +42,11 @@ function App() {
   }
 
   async function submit() {
+    if (fieldRef.current.value.length !== 3) {
+      alert("Put 3 Numbers");
+      return;
+    }
+
     setExecuting(true);
     const values = fieldRef.current.value
       .toString()
@@ -107,13 +112,15 @@ function App() {
                   <Fragment key={crypto.randomUUID()}>
                     <p>{item.value}</p>
                     <p>
-                      {item.result[0]}strikes {item.result[1]} balls
+                      {item.result[0]} strikes {item.result[1]} balls
                     </p>
                   </Fragment>
                 ))}
               </div>
             </div>
             <div className="pad">
+              <h2 className="label">NUMBER PAD</h2>
+              <h3 className="advice">Enter 3 Numbers</h3>
               <input
                 ref={fieldRef}
                 type="number"
@@ -124,69 +131,16 @@ function App() {
                 disabled={executing || finish}
               />
               <div className="grid-3x3">
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(1)}
-                  disabled={executing || finish}
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(2)}
-                  disabled={executing || finish}
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(3)}
-                  disabled={executing || finish}
-                >
-                  3
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(4)}
-                  disabled={executing || finish}
-                >
-                  4
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(5)}
-                  disabled={executing || finish}
-                >
-                  5
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(6)}
-                  disabled={executing || finish}
-                >
-                  6
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(7)}
-                  disabled={executing || finish}
-                >
-                  7
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(8)}
-                  disabled={executing || finish}
-                >
-                  8
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleClickButton(9)}
-                  disabled={executing || finish}
-                >
-                  9
-                </button>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
+                  <button
+                    type="button"
+                    onClick={() => handleClickButton(value)}
+                    disabled={executing || finish}
+                    key={value}
+                  >
+                    {value}
+                  </button>
+                ))}
                 <button
                   type="button"
                   onClick={() => handleClickButton("BACK")}
@@ -220,6 +174,7 @@ function App() {
             </div>
           </div>
           <div className="game-background" />
+          <dialog>asdf</dialog>
         </>
       ) : (
         <>

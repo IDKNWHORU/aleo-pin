@@ -3,8 +3,17 @@ program base_ball_game.aleo;
 struct Game:
     target as [u8; 3u32];
 
+record Score:
+    owner as address.private;
+    input_value as u8.private;
+
 
 mapping life:
+	key as address.public;
+	value as u8.public;
+
+
+mapping score:
 	key as address.public;
 	value as u8.public;
 
@@ -82,3 +91,18 @@ finalize main:
     assert.eq r6 true;
     sub r2 1u8 into r7;
     set r7 into life[r0];
+
+
+function recording:
+    input r0 as u8.private;
+    cast self.caller r0 into r1 as Score.record;
+    async recording self.caller r0 into r2;
+    output r1 as Score.record;
+    output r2 as base_ball_game.aleo/recording.future;
+
+finalize recording:
+    input r0 as address.public;
+    input r1 as u8.public;
+    get.or_use score[r0] 0u8 into r2;
+    add r2 r1 into r3;
+    set r3 into score[r0];

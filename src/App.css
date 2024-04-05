@@ -84,7 +84,7 @@
 
   p {
     font-family: "KBO-Dia-Gothic_bold";
-    color: #ff5500;
+    color: #ffcd00;
     text-shadow: 10px 10px 10px #000;
     text-align: center;
     font-size: 5em;
@@ -128,28 +128,27 @@
   position: relative;
   z-index: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .game {
   margin: auto;
   width: 50%;
-  height: 700px;
-  background: #0027ffdb;
-  border-radius: 5px;
-  border: 5px solid #aaa;
+  height: 660px;
+  background: #000000db;
+  border-radius: 15px;
   font-family: "KBO-Dia-Gothic_bold";
 
   h2 {
     background: #01147c;
     margin: 0;
-    padding: 18px;
-    border-radius: 5px 5px 0 0;
+    padding: 12px;
+    border-radius: 15px 15px 0 0;
   }
 
   h3 {
     margin: 0;
-    padding: 20px;
+    padding: 13px;
   }
 }
 
@@ -171,9 +170,10 @@
   h4 {
     border-bottom: 1px solid;
     margin: 0;
-    padding: 21px 0;
+    padding: 8px 0;
     text-align: center;
-    background: red;
+    background: #ffcd00;
+    color: #000;
   }
 
   p {
@@ -183,10 +183,22 @@
 
 .pad {
   margin: auto;
-  background: #0000009c;
+  background: #000000db;
   border-radius: 12px;
   max-width: 700px;
   padding: 15px;
+  height: 630px;
+
+  .label {
+    text-align: center;
+  }
+
+  .advice {
+    text-align: center;
+    background: #01147c;
+    margin: 0 0 12px;
+    padding: 19px 0;
+  }
 
   input {
     width: Calc(100% - 20px);
