@@ -97,6 +97,27 @@ function App() {
     setValue(`${value}${input}`);
   };
 
+  const resetGame = async () => {
+    setFinish(false);
+    setExecuting(true);
+    const randomList = [1, 2, 3]
+      .reduce((acc) => {
+        return createRandom(acc);
+      }, [])
+      .map((value) => `${value}u8`);
+
+    const result = await aleoWorker.localProgramExecution(
+      baseball_program,
+      "init",
+      randomList
+    );
+
+    setExecuting(false);
+    setTarget(result[0].replaceAll("\n", "").replaceAll(" ", ""));
+    setLife(9);
+    setHistory([]);
+  };
+
   return (
     <>
       {target.length > 0 ? (
@@ -166,10 +187,12 @@ function App() {
               <button
                 className="submit"
                 type="button"
-                disabled={executing || finish}
-                onClick={submit}
+                disabled={executing}
+                onClick={() => {
+                  finish ? resetGame() : submit();
+                }}
               >
-                {finish ? "Finish" : executing ? "checking..." : "SUBMIT"}
+                {finish ? "Restart" : executing ? "Execute..." : "SUBMIT"}
               </button>
             </div>
           </div>
