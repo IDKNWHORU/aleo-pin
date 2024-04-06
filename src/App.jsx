@@ -202,7 +202,7 @@ function App() {
       ) : (
         <>
           <div className="intro">
-            <p>Base Ball Game</p>
+            <p>Baseball Game</p>
             <button disabled={executing} onClick={startGame}>
               {executing ? `Starting...` : `Start`}
             </button>
